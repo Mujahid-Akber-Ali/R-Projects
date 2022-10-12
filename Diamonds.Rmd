@@ -1,0 +1,74 @@
+---
+title: "Exploratory Analysis"
+output:
+  pdf_document: default
+  html_document: default
+date: "2022-10-12"
+---
+## Mujahid Akber Ali
+## **Importing Library**
+```{r}
+library(tidyverse)
+```
+
+## **Visualizing distribution**
+```{r}
+ggplot(data = diamonds) + geom_bar(mapping = aes(x = cut))
+```
+---
+## **Counting diamond Cuts**
+```{r}
+library(tidyverse)
+diamonds %>% count(cut)
+```
+---
+## **Continuous chart**
+```{r}
+ggplot(data = diamonds) + geom_histogram(mapping = aes(x = carat), binwidth = 0.5)
+```
+
+## **Filter carat Less than 3 and Plotting**
+```{r}
+smaller <- diamonds %>% filter(carat < 3)
+ggplot(data = smaller, mapping = aes(x = carat)) + geom_histogram(binwidth = 0.1)
+```
+
+## **Frquency Plot with Legends**
+```{r}
+ggplot(data = smaller, mapping = aes(x = carat, colour = cut)) + geom_freqpoly(binwidth = 0.1)
+```
+
+## **Histogram**
+```{r}
+ggplot(data = smaller, mapping = aes(x = carat)) + geom_histogram(binwidth = 0.01)
+```
+
+## **Plotting Outliers**
+```{r}
+ggplot(diamonds) + geom_histogram(mapping = aes(x = y), binwidth = 0.5)
+```
+
+## **Filtering**
+```{r}
+diamonds %>% filter(between(y, 3, 20))
+```
+
+## **Box Plot**
+```{r}
+ggplot(data = diamonds, mapping = aes(x = cut, y = price)) + geom_boxplot()
+```
+
+## **Geomatrical counting**
+```{r}
+ggplot(data = diamonds) + geom_count(mapping = aes(x = cut, y = color))
+```
+
+## **Color Mapping**
+```{r}
+diamonds %>% count(color, cut) %>% ggplot(mapping = aes(x = color, y = cut)) + geom_tile(mapping = aes(fill = n))
+```
+
+
+
+
+
